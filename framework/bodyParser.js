@@ -1,4 +1,4 @@
-module.exports = (req, res, emitter, routeMask) => {
+module.exports = (req) => {
   let body = ''
   req.on('data', (chunk) => {
     body += chunk
@@ -6,10 +6,6 @@ module.exports = (req, res, emitter, routeMask) => {
   req.on('end', () => {
     if (body) {
       req.body = JSON.parse(body)
-    }
-    const emitted = emitter.emit(routeMask, req, res)
-    if (!emitted) {
-      req.end('Error Page')
     }
   })
 }

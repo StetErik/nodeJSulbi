@@ -8,12 +8,14 @@ const users = [
 ]
 
 router.get('/users', (req, res) => {
-  res.send(users)
+  const id = req.params.id
+  if(id) res.send(users.find(user => user.id.toString() === id))
+  else res.send(users)
 })
 
 router.post('/users', (req, res) => {
   const user = req.body
-  user['id'] = Date.now()
+  user.id = Date.now()
   users.push(user)
   res.send(user)
 })

@@ -20,7 +20,6 @@ module.exports = class App {
       Object.keys(endpoint).forEach(method => {
         this.emitter.on(this._getRouteMask(path, method), (req, res) => {
           const handler = endpoint[method]
-          this.middlewares.forEach(middleware => middleware(req, res))
           handler(req, res)
         })
       })
@@ -28,7 +27,12 @@ module.exports = class App {
   }
   _createServer(){
     return http.createServer((req, res) => {
-      bodyParser(req, res, this.emitter, this._getRouteMask(req.url, req.method))
+      this.middlewares.forEach(middleware => middleware(req, res))
+      bodyParser(req)
+      const emitted = this.emitter.emit(this._getRouteMask(req.pathname, req.method), req, res)
+      if (!emitted) {
+        res.end('Error Page')
+      }
     })
   }
   _getRouteMask(path, method) {
