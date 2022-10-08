@@ -1,5 +1,6 @@
 const http = require('http')
 const EventEmitter = require('events')
+const bodyParser = require('./bodyParser')
 
 module.exports = class App {
   constructor(){
@@ -27,10 +28,7 @@ module.exports = class App {
   }
   _createServer(){
     return http.createServer((req, res) => {
-      const emitted = this.emitter.emit(this._getRouteMask(req.url, req.method), req, res)
-      if(!emitted){
-        res.end('Error Page')
-      }
+      bodyParser(req, res, this.emitter, this._getRouteMask(req.url, req.method))
     })
   }
   _getRouteMask(path, method) {
