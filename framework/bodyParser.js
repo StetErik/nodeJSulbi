@@ -1,4 +1,4 @@
-module.exports = (req) => {
+module.exports = (req) => new Promise(resolve => {
   let body = ''
   req.on('data', (chunk) => {
     body += chunk
@@ -7,5 +7,6 @@ module.exports = (req) => {
     if (body) {
       req.body = JSON.parse(body)
     }
+    resolve()
   })
-}
+})

@@ -26,9 +26,9 @@ module.exports = class App {
     })
   }
   _createServer(){
-    return http.createServer((req, res) => {
+    return http.createServer(async (req, res) => {
       this.middlewares.forEach(middleware => middleware(req, res))
-      bodyParser(req)
+      await bodyParser(req)
       const emitted = this.emitter.emit(this._getRouteMask(req.pathname, req.method), req, res)
       if (!emitted) {
         res.end('Error Page')
