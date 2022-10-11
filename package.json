@@ -1,0 +1,24 @@
+{
+  "name": "ulbitvnodejs",
+  "version": "1.0.0",
+  "main": "test.js",
+  "scripts": {
+    "test": "cross-env MESSAGE='Hello STET ERIK!' node part0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StetErik/nodeJSulbi.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/StetErik/nodeJSulbi/issues"
+  },
+  "homepage": "https://github.com/StetErik/nodeJSulbi#readme",
+  "description": "",
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.3"
+  }
+}
